@@ -1,0 +1,4 @@
+mkdir -p build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=/home/ivan/embedded/stm32/blackpill/cmake/gcc-arm-none-eabi.cmake -S /home/ivan/embedded/stm32/blackpill -B /home/ivan/embedded/stm32/blackpill/build/Debug
+# pyocd gdbserver --target m487jidae --elf build/wm11.elf

@@ -1,0 +1,6 @@
+build/
+artifacts/
+.cache/
+.venv/
+__pycache__/
+.devcontainer/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz

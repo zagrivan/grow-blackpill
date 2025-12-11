@@ -1,0 +1,28 @@
+{
+    "name": "almalinux",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "devenv",
+    "workspaceFolder": "/workspaces/blackpill",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "llvm-vs-code-extensions.vscode-clangd",
+                "mcu-debug.debug-tracker-vscode",
+                "marus25.cortex-debug",
+                "twxs.cmake"
+            ]
+        }
+    },
+    "mounts": [
+        "source=/dev,target=/dev,type=bind"
+    ],
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "uname -a",
+    // Replace when using a ptrace-based debugger like C++, Go, and Rust
+    "runArgs": [
+        "--privileged"
+    ],
+    "remoteUser": "user"
+}

@@ -1,0 +1,92 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/hww_fw",
+            "name": "Debug hww_fw",
+            "request": "launch",
+            "type": "cortex-debug",
+            "gdbPath": "/opt/arm-none-eabi/bin/arm-none-eabi-gdb",
+            "servertype": "pyocd",
+            // "runToEntryPoint": "main",
+            "device": "m487sidae",
+            "serverArgs": [
+                "--target",
+                "m487sidae",
+                "--pack",
+                "${workspaceRoot}/m480.pack",
+                "--elf",
+                "${workspaceRoot}/build/hww_fw",
+                "-f",
+                "5000000"
+            ],
+            "overrideRestartCommands": [
+                "monitor reset halt"
+            ],
+            "preLaunchCommands": [
+                "source ${workspaceRoot}/.vscode/rtt.gdb",
+            ],
+            "svdFile": "/STM32F411.svd",
+            "preLaunchTask": "prelaunch_debug",
+            "postDebugTask": "kill_nc",
+            "showDevDebugOutput": "raw",
+            "overrideGDBServerStartedRegex": "GDB server listening on port",
+        },
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/test",
+            "name": "Debug test",
+            "request": "launch",
+            "type": "cortex-debug",
+            "gdbPath": "/opt/arm-none-eabi/bin/arm-none-eabi-gdb",
+            "servertype": "pyocd",
+            // "runToEntryPoint": "main",
+            "device": "m487sidae",
+            "serverArgs": [
+                "--target",
+                "m487sidae",
+                "--pack",
+                "${workspaceRoot}/m480.pack",
+                "--elf",
+                "${workspaceRoot}/build/test",
+                "-f",
+                "5000000"
+            ],
+            "overrideRestartCommands": [
+                "monitor reset halt"
+            ],
+            "preLaunchCommands": [
+                "source ${workspaceRoot}/.vscode/rtt.gdb",
+            ],
+            "svdFile": "/STM32F411.svd",
+            "preLaunchTask": "test_build",
+            "postDebugTask": "kill_nc",
+            "showDevDebugOutput": "raw",
+            "overrideGDBServerStartedRegex": "GDB server listening on port",
+        },
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/hww_fw",
+            "name": "Attach debug wm11.elf",
+            "request": "attach",
+            "type": "cortex-debug",
+            "gdbPath": "/opt/arm-none-eabi/bin/arm-none-eabi-gdb",
+            "servertype": "pyocd",
+            "device": "m487sidae",
+            "serverArgs": [
+                "--target",
+                "m487sidae",
+                "--pack",
+                "${workspaceRoot}/m480.pack",
+                "--elf",
+                "${workspaceRoot}/build/hww_fw"
+            ],
+            "preAttachCommands": [
+                "source ${workspaceRoot}/.vscode/rtt.gdb",
+            ],
+            "svdFile": "/STM32F411.svd",
+            "overrideGDBServerStartedRegex": "GDB server listening on port",
+        }
+    ]
+}

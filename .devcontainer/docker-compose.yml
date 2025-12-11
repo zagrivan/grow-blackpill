@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  devenv:
+    user: "user" 
+    privileged: true
+    network_mode: host
+    build:
+      context: .
+      network: host
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspaces/blackpill

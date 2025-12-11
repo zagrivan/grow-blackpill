@@ -1,0 +1,11 @@
+CompileFlags:
+    Add: [ 
+        -isystem, /opt/arm-none-eabi/arm-none-eabi/include/c++/13.2.1/, 
+        -isystem, /opt/arm-none-eabi/arm-none-eabi/include/c++/13.2.1/arm-none-eabi/, 
+        -isystem, /opt/arm-none-eabi/arm-none-eabi/include/,
+        '-D__cpp_concepts=202002',
+        -Wall,-Wextra,-Wunused-private-field,-Wunused-variable,-Wunused-parameter
+    ]
+Diagnostics:
+    Suppress: [-Wregister,asm_unknown_register_name,-Wignored-reference-qualifiers,-Wdeprecated-volatile,-Wsign-compare,-Wmain
+    ]

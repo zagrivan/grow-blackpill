@@ -1,0 +1,110 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "numaker_build",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-j12",
+                "hww_fw" // Or any specific target, e.g., "clean", "my_target"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build" // Sets the working directory to your project root
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true // Set to true to make this the default build task
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated", // Open a new terminal panel for this task
+                "focus": false
+            },
+            "problemMatcher": [] 
+            // {
+            //     "owner": "cpp",
+            //     // "fileLocation": [
+            //     //     "relative",
+            //     //     "${workspaceFolder}"
+            //     // ],
+            //     "fileLocation": [
+            //         "autoDetect",
+            //         "${workspaceFolder}"
+            //     ],
+            //     "source": "arm-none-eabi-g++",
+            //     "pattern": {
+            //         "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+            //         "file": 1,
+            //         "line": 2,
+            //         "column": 3,
+            //         "severity": 4,
+            //         "message": 5
+            //     }
+            // }
+        },
+        {
+            "label": "test_build",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-j12",
+                "test" // Or any specific target, e.g., "clean", "my_target"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build" // Sets the working directory to your project root
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true // Set to true to make this the default build task
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated", // Open a new terminal panel for this task
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "kill_nc",
+            "type": "shell",
+            "command": "kill -9 $(pgrep -x socat)",
+            "options": {
+                "cwd": "${workspaceFolder}/build" // Sets the working directory to your project root
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": false // Set to true to make this the default build task
+            },
+            "presentation": {
+                "reveal": "never", // Always show the terminal output
+                "panel": "dedicated" // Open a new terminal panel for this task
+            },
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": ".",
+                            "file": 1,
+                            "location": 2,
+                            "message": 3
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".",
+                        "endsPattern": ".",
+                    }
+                }
+            ]
+        },
+        {
+            "label": "prelaunch_debug",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "numaker_build",
+                // "nc"
+            ],
+        }
+    ]
+}
