@@ -20,7 +20,7 @@ RUN dnf -y install wget python3-pip git cmake gcc g++ vim zlib-devel libusbx-dev
 
 # Toolchain
 RUN  \
-    wget https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz \
+    wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz &&\
     tar xvf arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz -C /opt/ && \
     rm -f arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz &&\
     sh -c 'dnf -y install almalinux-release-devel' &&\
