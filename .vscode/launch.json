@@ -3,8 +3,8 @@
     "configurations": [
         {
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceRoot}/build/hww_fw",
-            "name": "Debug hww_fw",
+            "executable": "${workspaceRoot}/build/blackpill",
+            "name": "Debug blackpill",
             "request": "launch",
             "type": "cortex-debug",
             "gdbPath": "/opt/arm-none-eabi/bin/arm-none-eabi-gdb",
@@ -17,7 +17,7 @@
                 "--pack",
                 "${workspaceRoot}/m480.pack",
                 "--elf",
-                "${workspaceRoot}/build/hww_fw",
+                "${workspaceRoot}/build/blackpill",
                 "-f",
                 "5000000"
             ],
@@ -67,7 +67,7 @@
         },
         {
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceRoot}/build/hww_fw",
+            "executable": "${workspaceRoot}/build/blackpill",
             "name": "Attach debug wm11.elf",
             "request": "attach",
             "type": "cortex-debug",
@@ -80,7 +80,7 @@
                 "--pack",
                 "${workspaceRoot}/m480.pack",
                 "--elf",
-                "${workspaceRoot}/build/hww_fw"
+                "${workspaceRoot}/build/blackpill"
             ],
             "preAttachCommands": [
                 "source ${workspaceRoot}/.vscode/rtt.gdb",

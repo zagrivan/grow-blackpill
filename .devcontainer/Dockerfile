@@ -7,6 +7,9 @@ RUN dnf -y install wget python3-pip git cmake gcc g++ vim zlib-devel libusbx-dev
 
 # COPY resolv.conf /etc/resolv.conf
 
+# open cmsis pack for pyocd
+# https://keilpack.azureedge.net/pack/Keil.STM32F4xx_DFP.3.1.1.pack
+
 # RUN git clone https://github.com/openocd-org/openocd.git && \
 #     cd openocd && ./bootstrap && \
 #     ./configure --enable-ftdi --enable-cmsis-dap --enable-stlink && \
