@@ -1,15 +1,13 @@
 # build
 
 ## open container with vpn
-
--dependencies 
-    Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter. 
+- dependencies 
+   - Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter. 
     ```
     ext install ms-vscode-remote.remote-containers
     ```
 
-Ctrl+Shift+P 
-Enter
+* Ctrl+Shift+P and press enter
 ```
 >Dev Containers: Reopen in Container
 ```
