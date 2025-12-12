@@ -15,7 +15,7 @@ while true; do
     socat "TCP:$HOST:$PORT,retry=2,forever" STDOUT
     ret=$?
     sleep 1
-    echo "socat listen..."
+    printf "\n\nnew socat session\nlisten...\n\n"
     # if [[ $ret -ne 0 ]]; then
     #     sleep 2
     # else

@@ -2,54 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "numaker_build",
+            "label": "blackpill_build",
             "type": "shell",
             "command": "make",
             "args": [
                 "-j12",
-                "hww_fw" // Or any specific target, e.g., "clean", "my_target"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/build" // Sets the working directory to your project root
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true // Set to true to make this the default build task
-            },
-            "presentation": {
-                "reveal": "silent",
-                "panel": "dedicated", // Open a new terminal panel for this task
-                "focus": false
-            },
-            "problemMatcher": [] 
-            // {
-            //     "owner": "cpp",
-            //     // "fileLocation": [
-            //     //     "relative",
-            //     //     "${workspaceFolder}"
-            //     // ],
-            //     "fileLocation": [
-            //         "autoDetect",
-            //         "${workspaceFolder}"
-            //     ],
-            //     "source": "arm-none-eabi-g++",
-            //     "pattern": {
-            //         "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-            //         "file": 1,
-            //         "line": 2,
-            //         "column": 3,
-            //         "severity": 4,
-            //         "message": 5
-            //     }
-            // }
-        },
-        {
-            "label": "test_build",
-            "type": "shell",
-            "command": "make",
-            "args": [
-                "-j12",
-                "test" // Or any specific target, e.g., "clean", "my_target"
+                "blackpill" // Or any specific target, e.g., "clean", "my_target"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build" // Sets the working directory to your project root
@@ -102,7 +60,7 @@
             "label": "prelaunch_debug",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "numaker_build",
+                "blackpill_build",
                 // "nc"
             ],
         }

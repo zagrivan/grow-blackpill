@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
-# Enable CMake support for ASM and C languages
-enable_language(C ASM)
+# Enable CMake support for ASM, Cpp, C languages
+enable_language(C CXX ASM)
 # STM32CubeMX generated symbols (macros)
 set(MX_Defines_Syms 
 	USE_HAL_DRIVER 
@@ -18,6 +18,7 @@ set(MX_Include_Dirs
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Device/ST/STM32F4xx/Include
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Include
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/segger_rtt/inc
 )
 
 # STM32CubeMX generated application sources
@@ -31,6 +32,9 @@ set(MX_Application_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/sysmem.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/syscalls.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../startup_stm32f411xe.s
+    
+    ${CMAKE_SOURCE_DIR}/Core/Src/app_main.cpp
+    ${CMAKE_SOURCE_DIR}/Core/Src/RTT_Setup.cpp
 )
 
 # STM32 HAL/LL Drivers
@@ -69,6 +73,11 @@ set(FreeRTOS_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
 )
 
+set(RTT_Src
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/segger_rtt/src/SEGGER_RTT.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/segger_rtt/src/SEGGER_RTT_printf.c
+)
+
 # Link directories setup
 set(MX_LINK_DIRS
 
@@ -77,12 +86,34 @@ set(MX_LINK_DIRS
 set(MX_LINK_LIBS 
     STM32_Drivers
     ${TOOLCHAIN_LINK_LIBRARIES}
-    FreeRTOS	
+    FreeRTOS
+	SEGGER_RTT
 )
 # Interface library for includes and symbols
 add_library(stm32cubemx INTERFACE)
 target_include_directories(stm32cubemx INTERFACE ${MX_Include_Dirs})
 target_compile_definitions(stm32cubemx INTERFACE ${MX_Defines_Syms})
+
+target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
+    -Wall
+    -Wno-format
+    -Wno-unused-function
+    -fsigned-char
+    -ffunction-sections 
+    -fdata-sections
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics >
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-use-cxa-atexit>
+    -fno-exceptions
+)
+
+target_link_options(${CMAKE_PROJECT_NAME} PRIVATE
+    -Wl,--gc-sections
+    -Wl,-Map,${PROJECT_NAME}.map
+    -fno-exceptions 
+    # -Wl,--verbose
+)
+
 
 # Create STM32_Drivers static library
 add_library(STM32_Drivers OBJECT)
@@ -94,6 +125,13 @@ target_link_libraries(STM32_Drivers PUBLIC stm32cubemx)
 add_library(FreeRTOS OBJECT)
 target_sources(FreeRTOS PRIVATE ${FreeRTOS_Src})
 target_link_libraries(FreeRTOS PUBLIC stm32cubemx)
+
+# Create segger rtt static library
+add_library(SEGGER_RTT OBJECT)
+target_sources(SEGGER_RTT PRIVATE ${RTT_Src})
+target_link_libraries(SEGGER_RTT PUBLIC stm32cubemx)
+
+# target_include_directories(SEGGER_RTT PUBLIC ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/segger_rtt/inc)
 
 # Add STM32CubeMX generated application sources to the project
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MX_Application_Src})

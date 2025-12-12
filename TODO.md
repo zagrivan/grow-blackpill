@@ -1,15 +1,13 @@
 # TODO.md
 
 ### Todo
-- [ ] fix vscode tasks prebuild
 - [ ] led blink
-- [ ] None  
-  - [ ] None  
+- [ ] не срочно
+    - [ ] проверить .map файл, срабатывает ли -Wl,--gc-sections
 
 ### In Progress
 
 - [ ] None  
 
 ### Done ✓
-
-- [x] None
+- [x] fix vscode tasks prebuild
