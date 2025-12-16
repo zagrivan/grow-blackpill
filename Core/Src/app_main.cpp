@@ -5,6 +5,7 @@
 #include "SEGGER_RTT.h"
 #include "projdefs.h"
 #include "task.h"
+#include "dht.h"
 
 void dummyRtosTask(void*) {
   for (;;) {
