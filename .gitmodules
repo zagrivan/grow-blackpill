@@ -1,7 +1,3 @@
-# [submodule "thirdparty/m480bsp"]
-# 	path = thirdparty/m480bsp
-# 	url = https://git.protei.ru/wm-firmware-nuvoton/m480bsp
-# 	branch = fixes
 # [submodule "thirdparty/FreeRTOS-Kernel"]
 # 	path = thirdparty/FreeRTOS-Kernel
 # 	url = https://git.protei.ru/physical/embedded/external-mirrors/FreeRTOS-Kernel.git
@@ -15,3 +11,6 @@
 # [submodule "thirdparty/CMSIS_5"]
 # 	path = thirdparty/CMSIS_5
 # 	url = https://github.com/ARM-software/CMSIS_5.git
+[submodule "Middlewares/Third_Party/dht22"]
+	path = Middlewares/Third_Party/dht22
+	url = git@github.com:nimaltd/DHT.git

@@ -19,6 +19,7 @@ set(MX_Include_Dirs
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Device/ST/STM32F4xx/Include
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Include
     ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/segger_rtt/inc
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/dht22
 )
 
 # STM32CubeMX generated application sources
@@ -88,6 +89,7 @@ set(MX_LINK_LIBS
     ${TOOLCHAIN_LINK_LIBRARIES}
     FreeRTOS
 	SEGGER_RTT
+    dht
 )
 # Interface library for includes and symbols
 add_library(stm32cubemx INTERFACE)
@@ -130,6 +132,11 @@ target_link_libraries(FreeRTOS PUBLIC stm32cubemx)
 add_library(SEGGER_RTT OBJECT)
 target_sources(SEGGER_RTT PRIVATE ${RTT_Src})
 target_link_libraries(SEGGER_RTT PUBLIC stm32cubemx)
+
+# Create dht static library
+add_library(dht OBJECT)
+target_sources(dht PRIVATE ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/dht22/dht.c)
+target_link_libraries(dht PUBLIC stm32cubemx)
 
 # target_include_directories(SEGGER_RTT PUBLIC ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/segger_rtt/inc)
 

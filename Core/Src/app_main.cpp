@@ -13,6 +13,8 @@ void dummyRtosTask(void*) {
   }
 }
 
+
+
 extern "C" {
 int app_main_init() {
   SetupRtt_NoOptimize();
