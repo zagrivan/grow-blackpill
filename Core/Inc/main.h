@@ -59,6 +59,7 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define dht22Dat_Pin GPIO_PIN_1
 #define dht22Dat_GPIO_Port GPIOA
+#define dht22Dat_EXTI_IRQn EXTI1_IRQn
 
 /* USER CODE BEGIN Private defines */
 
